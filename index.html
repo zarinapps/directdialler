@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+        min-height: 100vh;
+        background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    }
+    .container {
+        max-width: 80%;
+        margin: 10px auto;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex-grow: 1; /* Fill remaining vertical space */
+        overflow-y: auto; /* Enable vertical scrolling if content exceeds container height */
+    }
+    .container.show {
+        opacity: 1;
+    }
+    h1 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff5733;
+    }
+    footer {
+        margin-top: auto; /* Push footer to the bottom */
+        width: 100%;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+    }
+</style>
+
+
+
+    <script>
+        // Function to extract phone number from URL and redirect to dialer
+        function redirectToDialer() {
+            // Extract phone number from URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var phoneNumber = urlParams.get('phone');
+            
+            // Check if phone number is provided
+            if (phoneNumber) {
+                // Show content container with fade-in animation
+                var container = document.getElementById('container');
+                container.classList.add('show');
+
+                // Show a message to the user
+                var messageElement = document.getElementById('message');
+                messageElement.innerHTML = '<h1>Connecting...</h1><p><span style="color: #ff0000;"><strong>Please make sure you have entered the correct number. </strong></span><br /><span style="color: #ff0000;"><strong>As we do not store your numbers data on our server, so we cannot verify the numbers.</strong></span></p>';
+
+                // Prepend "+" symbol if the number starts with a country code and doesn't start with zero
+                if (phoneNumber.length > 10 && !phoneNumber.startsWith('+') && !phoneNumber.startsWith('0')) {
+                    phoneNumber = '+' + phoneNumber;
+                } else if (phoneNumber.length === 10 && !phoneNumber.startsWith('0')) {
+                    // Add leading zero if number is 10 digits and doesn't start with "0"
+                    phoneNumber = '0' + phoneNumber;
+                }
+
+                // Countdown and delay the redirection by 5 seconds
+                var seconds = 5;
+                var countdownElement = document.getElementById('countdown');
+                var countdownInterval = setInterval(function() {
+                    seconds--;
+                    countdownElement.innerHTML = seconds;
+                    if (seconds <= 0) {
+                        clearInterval(countdownInterval);
+                        // Construct tel: URI and redirect to dialer
+                        window.location.href = 'tel:' + phoneNumber;
+                    }
+                }, 1000); // Update countdown every 1 second (1000 milliseconds)
+            } else {
+                // No phone number provided, show error message
+                alert('Phone number is missing.');
+            }
+        }
+    </script>
+</head>
+<body onload="redirectToDialer()">
+    <!-- Content Container -->
+    <div id="container" class="container">
+        <h1>Sending your Request</h1>        
+        <p id="message">Redirecting...</p>
+        <p>Please wait <span id="countdown">5</span> seconds while we send your request to your device dialler</p>
+        <p><strong>Advertisement</strong></p>
+        <!-- Foremedia Ad -->
+        <div id="foremediaads-c1"></div>
+        <script type="text/javascript" async src="https://platform.foremedia.net/code/45288/c1"></script>
+        <!-- Adsterra Ad -->
+        <script async="async" data-cfasync="false" src="//pl22890727.profitablegatecpm.com/0e5c8c9cc45a3109b1515cc5d4458c04/invoke.js"></script>
+        <div id="container-0e5c8c9cc45a3109b1515cc5d4458c04"></div>
+        <!-- Monetag Ad -->
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p style="text-align: center;"> <strong><marquee><a href="https://zarinsolutions.com/">Zarin Solutions Inc For any kind of  Websites, Mobile Apps, Software  Development or Digital Marketing  Contact us  +92 305 1766663</a> </strong></marquee></p>
+        <p style="text-align: center;">Design By <strong><a href="https://zarinsolutions.com/" target="_blank" rel="noopener">Zarin Solutions Inc</a></strong> Code with &#x1F493; of <strong><a href="https://anas.zarin.solutions/" target="_blank" rel="noopener">Muhammad Anas</a></strong></p>      
+    </footer>
+</body>
+</html>
